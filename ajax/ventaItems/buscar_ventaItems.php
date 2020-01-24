@@ -117,7 +117,7 @@
 						<td class='text-right'>$<?php echo number_format ($vi_abono,2); ?></td>
 						<td class='text-right'>$<?php echo number_format ($vi_saldo,2); ?></td>
 						<td class="text-right">
-						<a href="#" class='btn btn-default' title='Ver Paletas Vendidas' onclick="procesoVerDetalleventa('<?php echo $vi_codigo;?>','<?php echo $vi_numero;?>','<?php echo $fecha;?>','<?php echo $cli_nombres;?>');return false;" data-toggle="modal" data-target="#myModalDetalleventa"><i class="glyphicon glyphicon-usd"></i></a>
+						<a href="#" class='btn btn-default' title='Ver Productos Vendidas' onclick="procesoVerDetalleventa('<?php echo $vi_codigo;?>','<?php echo $vi_numero;?>','<?php echo $fecha;?>','<?php echo $cli_nombres;?>','<?php echo $vi_totalpagar;?>');return false;" data-toggle="modal" data-target="#myModalDetalleventa"><i class="glyphicon glyphicon-usd"></i></a>
 						<a href="#" class='btn btn-default' title='Reimprimir Recibo' onclick="imprimir_ventaItem('<?php echo $vi_codigo;?>');"><i class="glyphicon glyphicon-download"></i></a>
 						
 

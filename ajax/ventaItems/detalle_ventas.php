@@ -9,9 +9,11 @@
             $num = $_POST['numero']; 
             $fec = $_POST['fecha'];
             $cli = $_POST['cliente'];
+            $total = $_POST['total'];
             echo '<label>Venta:</label> '.$num.'</br>';
             echo '<label>Fecha:</label> '.$fec.'</br>';
-            echo '<label>Cliente:</label> '.$cli;
+            echo '<label>Cliente:</label> '.$cli.'</br>';
+            echo '<label>Total: $</label>'.$total;
         ?>
         <thead>
             <tr class="well">
@@ -36,6 +38,7 @@
                 <td class='text-right'>$<?php echo $fila[6]; ?></td>
             </tr>
         </tbody>
+
         <?php } ?>
     </table>
 </div>

@@ -21,13 +21,15 @@
 		}
 
 
-		function procesoVerDetalleCompra(co_codigo,numero,fecha,proveedor){
+		function procesoVerDetalleCompra(co_codigo,numero,fecha,proveedor,total){
 			var resultado=""; 
 	        var parametros = {
 		            "co_codigo" : co_codigo,
 		            "numero" : numero,
 		            "fecha" : fecha,
 		            "proveedor" : proveedor,
+		            "total" : total,
+
 		    };
 		    request = $.ajax({
 		        data:  parametros,

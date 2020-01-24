@@ -9,9 +9,11 @@
             $num = $_POST['numero']; 
             $fec = $_POST['fecha'];
             $pro = $_POST['proveedor'];
+            $tot = $_POST['total'];
             echo '<label>Compra:</label> '.$num.'</br>';
             echo '<label>Fecha:</label> '.$fec.'</br>';
-            echo '<label>Proveedor:</label> '.$pro;
+            echo '<label>Proveedor:</label> '.$pro.'</br>';
+            echo '<label>Total: $</label>'.$tot;
         ?>
         <thead>
             <tr class="well">

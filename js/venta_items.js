@@ -20,14 +20,14 @@
 			})
 		}
 
-
-		function procesoVerDetalleventa(vi_codigo,numero,fecha,cliente){
+		function procesoVerDetalleventa(vi_codigo,numero,fecha,cliente,total){
 			var resultado=""; 
 	        var parametros = {
 		            "vi_codigo" : vi_codigo,
 		            "numero" : numero,
 		            "fecha" : fecha,
 		            "cliente" : cliente,
+		            "total" : total,
 		    };
 		    request = $.ajax({
 		        data:  parametros,

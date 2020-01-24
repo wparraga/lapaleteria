@@ -117,7 +117,9 @@
 						<td class='text-right'>$<?php echo number_format ($c_abono,2); ?></td>
 						<td class='text-right'>$<?php echo number_format ($c_saldo,2); ?></td>
 						<td class="text-right">
-						<a href="#" class='btn btn-default' title='Ver Productos Comprados' onclick="procesoVerDetalleCompra('<?php echo $c_codigo;?>','<?php echo $c_numero;?>','<?php echo $fecha;?>','<?php echo $pro_nombres;?>');return false;" data-toggle="modal" data-target="#myModalDetalleCompra"><i class="glyphicon glyphicon-usd"></i></a>
+						<a href="#" class='btn btn-default' title='Ver Productos Comprados' onclick="procesoVerDetalleCompra('<?php echo $c_codigo;?>','<?php echo $c_numero;?>','<?php echo $fecha;?>','<?php echo $pro_nombres;?>','<?php echo $c_totalpagar;?>');return false;" data-toggle="modal" data-target="#myModalDetalleCompra"><i class="glyphicon glyphicon-usd"></i></a>
+
+						<a href="editar_compras.php?c_codigo=<?php echo $c_codigo;?>" class='btn btn-default' title='Editar Compra' ><i class="glyphicon glyphicon-edit"></i></a>
 
 						<a href="#" class='btn btn-default' title='Reimprimir Recibo' onclick="imprimir_ventaItem('<?php echo $c_codigo;?>');"><i class="glyphicon glyphicon-download"></i></a>
 						
