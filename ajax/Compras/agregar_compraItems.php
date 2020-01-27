@@ -32,7 +32,7 @@ if (isset($_GET['id']))//codigo elimina un elemento del array
 <tr>
 	<th class='text-center'>CODIGO</th>
 	<th class='text-center'>CANT.</th>
-	<th>PRODUCTO</th>
+	<th >PRODUCTO</th>
 	<th class='text-right'>PRECIO COMPRA.</th>
 	<th class='text-right'>PRECIO TOTAL</th>
 	<th></th>
@@ -56,24 +56,6 @@ if (isset($_GET['id']))//codigo elimina un elemento del array
 		$sumador_total+=$precio_total_r;//Sumador
 	
 		?>
-<script>
-	function calculariva(subto,viva){
-		iiva=(subto*viva)/100;
-		iiva=iiva.toFixed(2);
-		to=parseFloat(subto)+parseFloat(iiva);
-		to=to.toFixed(2);
-        document.getElementById('iva').value = iiva; 
-        document.getElementById('total').value = to;               
-	}
-
-	function nocalculariva(subto){
-		iiva=0;
-		to=subto;
-		document.getElementById('iva').value = iiva; 
-        document.getElementById('total').value = to; 
-            
-	}
-</script>
 		<tr>
 			<td class='text-center'><?php echo $codigo_producto;?></td>
 			<td class='text-center'><?php echo $cantidad;?></td>
@@ -85,27 +67,8 @@ if (isset($_GET['id']))//codigo elimina un elemento del array
 		<?php
 
 	}
-	$subtotal=number_format($sumador_total,2,'.','');
-	$total_iva=number_format($total_iva,2,'.','');
-	$total_factura=$subtotal+$total_iva;
+	$total_factura=number_format($sumador_total,2,'.','');
 ?>
-<tr>
-	<td class='text-right' colspan=4>SUBTOTAL $</td>
-	<td class='text-right'><input type="text" id="subtotal" name="subtotal" size="6" style="text-align:right" value="<?php echo number_format($subtotal,2);?>" maxlength="0"></td>
-	<td></td>
-</tr>
-<tr>
-	<td class='text-right' colspan=4>IVA (<?php echo IVA?>)% $
-		<label class="radio-inline">
-			<input type="radio" name="wasa" id="Radios1" value="Si" onclick="calculariva('<?php echo $subtotal;?>','<?php echo IVA?>');">Si
-		</label>
-		<label class="radio-inline">
-			<input type="radio" name="wasa" id="Radios2" value="No" onclick="nocalculariva('<?php echo $subtotal;?>');">No
-		</label>
-	</td>
-	<td class='text-right'><input type="text" id="iva" name="iva" size="6" value="0" style="text-align:right" maxlength="0"></td>
-
-</tr>
 <tr>
 	<td class='text-right' colspan=4>TOTAL $</td>
 	<td class='text-right'><input type="text" id="total" name="total" size="6" style="text-align:right" value="<?php echo number_format($total_factura,2);?>" maxlength="0"></td>

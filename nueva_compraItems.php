@@ -9,7 +9,7 @@
 	$active_productos="";
 	$active_clientes="";
 	$active_usuarios="";	
-	$title="Nueva Venta | La Paleteria";
+	$title="Nueva Compra | La Paleteria";
 	
 	/* Connect To Database*/
 	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
@@ -20,7 +20,6 @@
         header("Location: nueva_compraItems.php");
 	}
 ?>
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <?php include("head.php");?>
@@ -83,15 +82,12 @@
 							<div class="col-md-2">
 								<input type="datetime" class="form-control input-sm" id="fecha" value="<?php echo date("Y-m-d H:i:s");?>" required>
 							</div>
-							<label for="pago" class="col-md-1 control-label">Pago:</label>
+							<label for="pago" class="col-md-1 control-label">Estado:</label>
 							<div class="col-md-2">
-								<select class='form-control input-sm' id="condiciones" onChange="document.getElementById('abono').disabled=this.selectedIndex!=1">>
-									<option value="1">Contado</option>
-									<option value="2">Crédito</option>
+								<select class='form-control input-sm' id="condiciones">
+									<option value="1">Pendiente</option>
+									<option value="2">Pagada</option>
 								</select>
-							</div>
-							<div class="col-md-2">	
-								<input type="text" class="form-control input-sm" id="abono" disabled="true" placeholder="Abono" maxlength="8" required="" onkeypress="return soloDecimales(event,this);"/>
 							</div>
 						</div>
 				

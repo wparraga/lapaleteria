@@ -26,11 +26,7 @@
 	$id_vendedor=intval($_GET['id_vendedor']);
 	$fecha=$_GET['fecha'];
 	$condiciones=mysqli_real_escape_string($con,(strip_tags($_REQUEST['condiciones'], ENT_QUOTES)));
-	$subto=floatval($_GET['subtotal']);
-	$ivaa=floatval($_GET['iva']);
 	$tot=floatval($_GET['total']);
-	$abono=floatval($_GET['abono']);
-	$saldo=floatval($_GET['saldo']);
 
 	//Fin de variables por GET
 	$sql=mysqli_query($con, "select LAST_INSERT_ID(CO_NUMERO) as last from compras order by CO_CODIGO desc limit 0,1 ");

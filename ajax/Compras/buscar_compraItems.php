@@ -85,10 +85,8 @@
 					<th>Fecha</th>
 					<th>Proveedor</th>
 					<th>Registrador</th>
-					<th>Tipo</th>
 					<th class='text-right'>Total</th>
-					<th class='text-right'>Abono</th>
-					<th class='text-right'>Saldo</th>
+					<th class='text-right'>Estado</th>
 					<th class='text-right'>Acciones</th>
 				</tr>
 				<?php
@@ -100,30 +98,22 @@
 						$pro_telefono=$row['PRO_CELULAR'];
 						$pro_direccion=$row['PRO_DIRECCION'];
 						$nombre_vendedor=$row['firstname']." ".$row['lastname'];
-						$c_tipopago=$row['CO_TIPOPAGO'];
-						if ($c_tipopago==1){$text_estado="Contado";$label_class='label-success';}
-						else{$text_estado="Crédito";$label_class='label-warning';}
+						$c_estado=$row['CO_ESTADO'];
+						if ($c_estado==1){$text_estado="Pendiente";$label_class='label-warning';}
+						else{$text_estado="Pagada";$label_class='label-success';}
 						$c_totalpagar=$row['CO_TOTAL'];
-						$c_abono=$row['CO_ABONO'];
-						$c_saldo=$row['CO_SALDO'];
 					?>
 					<tr>
 						<td><?php echo $c_numero; ?></td>
 						<td><?php echo $fecha; ?></td>
 						<td><a href="#" data-toggle="tooltip" data-placement="top" title="<i class='glyphicon glyphicon-phone'></i> <?php echo $pro_telefono;?><br><i class='glyphicon glyphicon-envelope'></i>  <?php echo $pro_direccion;?>" ><?php echo $pro_nombres;?></a></td>
 						<td><?php echo $nombre_vendedor; ?></td>
-						<td><span class="label <?php echo $label_class;?>"><?php echo $text_estado; ?></span></td>
-						<td class='text-right'>$<?php echo number_format ($c_totalpagar,2); ?></td>		
-						<td class='text-right'>$<?php echo number_format ($c_abono,2); ?></td>
-						<td class='text-right'>$<?php echo number_format ($c_saldo,2); ?></td>
+						<td class='text-right'>$<?php echo number_format ($c_totalpagar,2); ?></td>	
+						<td class='text-right'><span class="label <?php echo $label_class;?>"><?php echo $text_estado; ?></span></td>
 						<td class="text-right">
 						<a href="#" class='btn btn-default' title='Ver Productos Comprados' onclick="procesoVerDetalleCompra('<?php echo $c_codigo;?>','<?php echo $c_numero;?>','<?php echo $fecha;?>','<?php echo $pro_nombres;?>','<?php echo $c_totalpagar;?>');return false;" data-toggle="modal" data-target="#myModalDetalleCompra"><i class="glyphicon glyphicon-usd"></i></a>
-
 						<a href="editar_compras.php?c_codigo=<?php echo $c_codigo;?>" class='btn btn-default' title='Editar Compra' ><i class="glyphicon glyphicon-edit"></i></a>
-
 						<a href="#" class='btn btn-default' title='Reimprimir Recibo' onclick="imprimir_ventaItem('<?php echo $c_codigo;?>');"><i class="glyphicon glyphicon-download"></i></a>
-						
-
 						<a href="#" class='btn btn-default' title='Eliminar Compra' onclick="eliminarcompraitems('<?php echo $c_codigo; ?>')"><i class="glyphicon glyphicon-trash"></i> </a> 
 						</td>
 						

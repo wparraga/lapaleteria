@@ -20,31 +20,31 @@
 		}
 
 	function agregarcompra(id)
-		{
-			var pcompra=document.getElementById('pcompra_'+id).value;
-			var cantidad=document.getElementById('cantidad_'+id).value;
-			//Inicia validacion
+	{
+		var pcompra=document.getElementById('pcompra_'+id).value;
+		var cantidad=document.getElementById('cantidad_'+id).value;
+		//Inicia validacion
 
-			//Fin validacion
-			$.ajax({
-	        type: "POST",
-	        url: "./ajax/compras/agregar_compraItems.php",
-	        data: "id="+id+"&pcompra="+pcompra+"&cantidad="+cantidad,
-			 beforeSend: function(objeto){
-				$("#resultados").html("Mensaje: Cargando...");
-			  },
-	        success: function(datos){
-			$("#resultados").html(datos);
-			}
-			});
-		}
+		//Fin validacion
+		$.ajax({
+        type: "POST",
+        url: "./ajax/compras/agregar_compraItems.php",
+        data: "id="+id+"&pcompra="+pcompra+"&cantidad="+cantidad,
+		 beforeSend: function(objeto){
+			$("#resultados").html("Mensaje: Cargando...");
+		  },
+		  success: function(datos){
+		  	$("#resultados").html(datos);
+		  }
+		});
+	}
 		
 		
 	function eliminar (id)
 		{	
 			$.ajax({
 	        type: "GET",
-	        url: "./ajax/ventaItems/agregar_ventaItems.php",
+	        url: "./ajax/Compras/agregar_compraItems.php",
 	        data: "id="+id,
 			 beforeSend: function(objeto){
 				$("#resultados").html("Mensaje: Cargando...");
@@ -60,8 +60,6 @@
 		  var id_vendedor = $("#id_vendedor").val();
 		  var fecha = $("#fecha").val();
 		  var condiciones = $("#condiciones").val();
-		  var subtotal = parseFloat($("#subtotal").val());
-		  var iva = parseFloat($("#iva").val());
 		  var total = parseFloat($("#total").val());
 		  if (id_proveedor==""){
 			  swal({
@@ -87,28 +85,7 @@
 			  return false;
 		  }
 
-		  if (condiciones==1){
-		  	var abono = total;
-		  	var saldo=0;
-		  	VentanaCentrada('./pdf/documentos/compraItems_pdf.php?id_proveedor='+id_proveedor+'&id_vendedor='+id_vendedor+'&fecha='+fecha+'&condiciones='+condiciones+'&subtotal='+subtotal+'&iva='+iva+'&total='+total+'&abono='+abono+'&saldo='+saldo,'Factura','','1024','768','true');
-		  }
-		  if (condiciones==2){
-			  	var abono = parseFloat($("#abono").val());
-			  	var saldo = total - abono;	  	
-			  	if (abono>=total){
-			  		swal({
-			  			type: "error",
-						title: " El abono no puede ser mayor o igual que el total a pagar",
-						showConfirmButton: true,
-						confirmButtonColor: "#d9534f",
-						confirmButtonText: "Aceptar",
-						closeOnConfirm: false
-					})
-					return false;
-				}else{
-					VentanaCentrada('./pdf/documentos/compraItems_pdf.php?id_cliente='+id_cliente+'&id_vendedor='+id_vendedor+'&fecha='+fecha+'&condiciones='+condiciones+'&subtotal='+subtotal+'&iva='+iva+'&total='+total+'&abono='+abono+'&saldo='+saldo,'Factura','','1024','768','true');
-				}
-		  }
+	  	VentanaCentrada('./pdf/documentos/compraItems_pdf.php?id_proveedor='+id_proveedor+'&id_vendedor='+id_vendedor+'&fecha='+fecha+'&condiciones='+condiciones+'&total='+total,'Factura','','1024','768','true');
 	 	});
 		
 		$( "#guardar_proveedor" ).submit(function( event ) {
@@ -132,7 +109,7 @@
 		
 
 		$( "#guardar_producto" ).submit(function( event ) {
-			$('#guardar_datos').attr("disabled", true);
+			$('#guardar_datos_producto').attr("disabled", true);
 			var parametros = $(this).serialize();
 			$.ajax({
 				type: "POST",
@@ -143,7 +120,7 @@
 				},
 				success: function(datos){
 					$("#resultados_ajax_productos").html(datos);
-					$('#guardar_datos').attr("disabled", false);
+					$('#guardar_datos_producto').attr("disabled", false);
 					load(1);
 				}
 			});

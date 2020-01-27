@@ -15,7 +15,6 @@
 <html lang="es">
   <head>
 	<?php include("head.php");?>
-
   </head>
   <body>
 	<?php
@@ -34,7 +33,6 @@
 				include("modal/detalle_compras.php");
 			?>
 				<form class="form-horizontal" role="form" id="">
-				
 						<div class="form-group row">
 							<label for="q" class="col-md-2 control-label">Buscar por:</label>
 							<div class="col-md-5">
@@ -45,11 +43,7 @@
 									<span class="glyphicon glyphicon-search" ></span> Buscar</button>
 								<span id="loader"></span>
 							</div>
-							
 						</div>
-				
-				
-				
 			</form>
 				<div id="resultados"></div><!-- Carga los datos ajax -->
 				<div class='outer_div'></div><!-- Carga los datos ajax -->

@@ -136,7 +136,7 @@
 		  </div>
 		  <div class="modal-footer">
 			<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cerrar</button>
-			<button type="submit" class="btn btn-success" id="guardar_datos"><span class="glyphicon glyphicon-ok"></span> Guardar datos</button>
+			<button type="submit" class="btn btn-success" id="guardar_datos_producto"><span class="glyphicon glyphicon-ok"></span> Guardar datos</button>
 		  </div>
 		  </form>
 		</div>

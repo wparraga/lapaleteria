@@ -11,27 +11,25 @@
 	$active_usuarios="";	
 	$title="Editar Compra | La Paleteria";
 	
-	/* Connect To Database*/
-	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
-	require_once ("config/conexion.php");//Contiene funcion que conecta a la base de datos
+	require_once ("config/db.php");
+	require_once ("config/conexion.php");
 	
 	if (isset($_GET['c_codigo']))
 	{
 		$c_codigo=intval($_GET['c_codigo']);
-		$campos="proveedores.PRO_CODIGO, proveedores.PRO_NOMBRES, proveedores.PRO_CELULAR, proveedores.PRO_DIRECCION, compras.ID_VENDEDOR, compras.CO_FECHA, compras.CO_TIPOPAGO, compras.CO_NUMERO,compras.CO_SUBTOTAL,compras.CO_IVA,compras.CO_TOTAL";
+		$campos="proveedores.PRO_CODIGO, proveedores.PRO_NOMBRES, proveedores.PRO_CELULAR, proveedores.PRO_DIRECCION, compras.ID_VENDEDOR, compras.CO_FECHA, compras.CO_NUMERO,compras.CO_TOTAL,compras.CO_ESTADO";
 		$sql_factura=mysqli_query($con,"select $campos from compras, proveedores where compras.PRO_CODIGO=proveedores.PRO_CODIGO and CO_CODIGO='".$c_codigo."'");
 		$count=mysqli_num_rows($sql_factura);
 		if ($count==1)
 		{
 				$rw_factura=mysqli_fetch_array($sql_factura);
 				$id_proveedor=$rw_factura['PRO_CODIGO'];
-				$nombre_proveedor=$rw_factura['PRO_NOMRES'];
+				$nombre_proveedor=$rw_factura['PRO_NOMBRES'];
 				$telefono_proveedor=$rw_factura['PRO_CELULAR'];
 				$direccion_proveedor=$rw_factura['PRO_DIRECCION'];
 				$id_vendedor_db=$rw_factura['ID_VENDEDOR'];
-				$fecha_factura=date("d/m/Y", strtotime($rw_factura['CO_FECHA']));
-				//$condiciones=$rw_factura['condiciones'];
-				$estado_compra=$rw_factura['CO_TIPOPAGO'];
+				$fecha_factura=date("Y/m/d H:i:s", strtotime($rw_factura['CO_FECHA']));
+				$condiciones=$rw_factura['CO_ESTADO'];
 				$numero_compra=$rw_factura['CO_NUMERO'];
 				$_SESSION['c_codigo']=$c_codigo;
 				$_SESSION['numero_compra']=$numero_compra;
@@ -48,8 +46,7 @@
 		exit;
 	}
 ?>
-<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <?php include("head.php");?>
   </head>
@@ -60,32 +57,32 @@
     <div class="container">
 	<div class="panel panel-info">
 		<div class="panel-heading">
-			<h4><i class='glyphicon glyphicon-edit'></i> Editar Factura</h4>
+			<h4><i class='glyphicon glyphicon-edit'></i> Editar Compra</h4>
 		</div>
 		<div class="panel-body">
 		<?php 
 			include("modal/buscar_productos.php");
-			include("modal/registro_clientes.php");
+			include("modal/registro_proveedores.php");
 			include("modal/registro_productos.php");
 		?>
-			<form class="form-horizontal" role="form" id="datos_factura">
+			<form class="form-horizontal" role="form" id="datos_facturacompra">
 				<div class="form-group row">
-				  <label for="nombre_cliente" class="col-md-1 control-label">Cliente</label>
+				  <label for="nombre_proveedor" class="col-md-1 control-label">Proveedor: </label>
 				  <div class="col-md-3">
-					  <input type="text" class="form-control input-sm" id="nombre_cliente" placeholder="Selecciona un cliente" required value="<?php echo $nombre_cliente;?>">
-					  <input id="id_cliente" name="id_cliente" type='hidden' value="<?php echo $id_cliente;?>">	
+					   <input type="text" class="form-control input-sm" id="nombre_proveedor" placeholder="Selecciona Proveedor" required value="<?php echo $nombre_proveedor;?>">
+					  <input id="id_proveedor" name="id_proveedor" type='hidden' value="<?php echo $id_proveedor;?>">
 				  </div>
 				  <label for="tel1" class="col-md-1 control-label">Teléfono</label>
 							<div class="col-md-2">
-								<input type="text" class="form-control input-sm" id="tel1" placeholder="Teléfono" value="<?php echo $telefono_cliente;?>" readonly>
+								<input type="text" class="form-control input-sm" id="tel1" placeholder="Teléfono" value="<?php echo $telefono_proveedor;?>" readonly>
 							</div>
-					<label for="mail" class="col-md-1 control-label">Email</label>
+					<label for="direccion_proveedor" class="col-md-1 control-label">Dirección: </label>
 							<div class="col-md-3">
-								<input type="text" class="form-control input-sm" id="mail" placeholder="Email" readonly value="<?php echo $email_cliente;?>">
+								<input type="text" class="form-control input-sm" id="direccion_proveedor" placeholder="direccion_proveedor" readonly value="<?php echo $direccion_proveedor;?>">
 							</div>
 				 </div>
 						<div class="form-group row">
-							<label for="empresa" class="col-md-1 control-label">Vendedor</label>
+							<label for="empresa" class="col-md-1 control-label">Registrador</label>
 							<div class="col-md-3">
 								<select class="form-control input-sm" id="id_vendedor" name="id_vendedor">
 									<?php
@@ -109,19 +106,11 @@
 							<div class="col-md-2">
 								<input type="text" class="form-control input-sm" id="fecha" value="<?php echo $fecha_factura;?>" readonly>
 							</div>
-							<label for="email" class="col-md-1 control-label">Pago</label>
+							<label for="email" class="col-md-1 control-label">Estado: </label>
 							<div class="col-md-2">
 								<select class='form-control input-sm ' id="condiciones" name="condiciones">
-									<option value="1" <?php if ($condiciones==1){echo "selected";}?>>Efectivo</option>
-									<option value="2" <?php if ($condiciones==2){echo "selected";}?>>Cheque</option>
-									<option value="3" <?php if ($condiciones==3){echo "selected";}?>>Transferencia bancaria</option>
-									<option value="4" <?php if ($condiciones==4){echo "selected";}?>>Crédito</option>
-								</select>
-							</div>
-							<div class="col-md-2">
-								<select class='form-control input-sm ' id="estado_factura" name="estado_factura">
-									<option value="1" <?php if ($estado_factura==1){echo "selected";}?>>Pagado</option>
-									<option value="2" <?php if ($estado_factura==2){echo "selected";}?>>Pendiente</option>
+									<option value="1" <?php if ($condiciones==1){echo "selected";}?>>Pendiente</option>
+									<option value="2" <?php if ($condiciones==2){echo "selected";}?>>Pagado</option>
 								</select>
 							</div>
 						</div>
@@ -135,8 +124,8 @@
 						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#nuevoProducto">
 						 <span class="glyphicon glyphicon-plus"></span> Nuevo producto
 						</button>
-						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#nuevoCliente">
-						 <span class="glyphicon glyphicon-user"></span> Nuevo cliente
+						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#nuevoProveedor">
+						 <span class="glyphicon glyphicon-user"></span> Nuevo Proveedor
 						</button>
 						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
 						 <span class="glyphicon glyphicon-search"></span> Agregar productos
@@ -148,8 +137,7 @@
 				</div>
 			</form>	
 			<div class="clearfix"></div>
-				<div class="editar_factura" class='col-md-12' style="margin-top:10px"></div><!-- Carga los datos ajax -->	
-			
+			<div class="editar_compra" class='col-md-12' style="margin-top:10px"></div><!-- Carga los datos ajax -->	
 		<div id="resultados" class='col-md-12' style="margin-top:10px"></div><!-- Carga los datos ajax -->			
 			
 		</div>
@@ -161,20 +149,23 @@
 	include("footer.php");
 	?>
 	<script type="text/javascript" src="js/VentanaCentrada.js"></script>
-	<script type="text/javascript" src="js/editar_factura.js"></script>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/editar_compraItems.js"></script>
+	<link rel="stylesheet" href="css/jquery-ui.css">
+    <script type="text/javascript" src="js/jquery/jquery-ui.js"></script>
+
+
+
 	<script>
 		$(function() {
-						$("#nombre_cliente").autocomplete({
-							source: "./ajax/autocomplete/clientes.php",
+						$("#nombre_proveedor").autocomplete({
+							source: "./ajax/proveedores/autocomplete/proveedores.php",
 							minLength: 2,
 							select: function(event, ui) {
 								event.preventDefault();
-								$('#id_cliente').val(ui.item.id_cliente);
-								$('#nombre_cliente').val(ui.item.nombre_cliente);
-								$('#tel1').val(ui.item.telefono_cliente);
-								$('#mail').val(ui.item.email_cliente);
+								$('#id_proveedor').val(ui.item.id_proveedor);
+								$('#nombre_proveedor').val(ui.item.nombre_proveedor);
+								$('#tel1').val(ui.item.telefono_proveedor);
+								$('#direccion_proveedor').val(ui.item.direccion_proveedor);
 																
 								
 							 }
@@ -183,19 +174,19 @@
 						
 					});
 					
-	$("#nombre_cliente" ).on( "keydown", function( event ) {
+	$("#nombre_proveedor" ).on( "keydown", function( event ) {
 						if (event.keyCode== $.ui.keyCode.LEFT || event.keyCode== $.ui.keyCode.RIGHT || event.keyCode== $.ui.keyCode.UP || event.keyCode== $.ui.keyCode.DOWN || event.keyCode== $.ui.keyCode.DELETE || event.keyCode== $.ui.keyCode.BACKSPACE )
 						{
-							$("#id_cliente" ).val("");
+							$("#id_proveedor" ).val("");
 							$("#tel1" ).val("");
-							$("#mail" ).val("");
+							$("#direccion_proveedor" ).val("");
 											
 						}
 						if (event.keyCode==$.ui.keyCode.DELETE){
-							$("#nombre_cliente" ).val("");
-							$("#id_cliente" ).val("");
+							$("#nombre_proveedor" ).val("");
+							$("#id_proveedor" ).val("");
 							$("#tel1" ).val("");
-							$("#mail" ).val("");
+							$("#direccion_proveedor" ).val("");
 						}
 			});	
 	</script>

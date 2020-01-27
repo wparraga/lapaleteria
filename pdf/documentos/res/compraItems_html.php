@@ -44,7 +44,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
                     P&aacute;gina [[page_cu]]/[[page_nb]]
                 </td>
                 <td style="width: 50%; text-align: right">
-                    &copy; <?php echo " mezcell.com - "; echo  $anio=date('Y'); ?>
+                    &copy; <?php echo " @lapaleteriaflavioalfaro - "; echo  $anio=date('Y'); ?>
                 </td>
             </tr>
         </table>
@@ -104,7 +104,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 $nums=1;
 $sumador_total=0;
 
-$insert=mysqli_query($con,"INSERT INTO compras VALUES ('','$id_proveedor','$numero_factura','$fecha','$subto','$ivaa','$tot','$condiciones','$abono','$saldo','$id_vendedor')");
+$insert=mysqli_query($con,"INSERT INTO compras VALUES ('','$id_proveedor','$numero_factura','$fecha','$tot','$id_vendedor','$condiciones')");
 $query=mysqli_query($con,"select distinct last_insert_id() from compras");
 while($r=mysqli_fetch_row($query)){
 	$codcompra=$r[0];
@@ -152,32 +152,17 @@ while ($row=mysqli_fetch_array($sql))
 	$total_iva=number_format($ivaa,2,'.','');
 	$total_factura=number_format($tot,2,'.','');
 ?>
-	  
-        <tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">SUBTOTAL:</td>
-            <td style="font-size:11pt; text-align: right;font-weight:bold">$ <?php echo number_format($subtotal,2);?></td>
-        </tr>
-		<tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">IVA (<?php echo IVA; ?>)%: </td>
-            <td style="font-size:11pt; text-align: right;font-weight:bold">$ <?php echo number_format($total_iva,2);?></td>
-        </tr>
         <tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL:</td>
             <td style="font-size:11pt; text-align: right;font-weight:bold">$ <?php echo number_format($total_factura,2);?></td>
         </tr>
     </table>
-    <?php
-    	$abo=number_format($abono,2,'.','');
-		$sal=number_format($saldo,2,'.','');
-    ?>
        <br>
 		<table cellspacing="0" border="0.5" style="width: 100%; text-align: left; font-size: 11pt;">
         <tr>
            <td style="width:25%;" class='midnight-blue'>REGISTRADOR</td>
 		   <td style="width:25%;" class='midnight-blue'>FECHA</td>
-		   <td style="width:20%;" class='midnight-blue'>FORMA DE PAGO</td>
-		   <td style="width:15%;" class='midnight-blue'>ABONO</td>
-		   <td style="width:15%;" class='midnight-blue'>SALDO</td>
+		   <td style="width:20%;" class='midnight-blue'>ESTADO DE PAGO</td>
         </tr>
 		<tr>
 			<td style="width:25%;">
@@ -189,29 +174,8 @@ while ($row=mysqli_fetch_array($sql))
 		    </td>
 		    <td style="width:25%;"><?php echo $fecha;?></td>
 		    <td style="width:20%;" >
-				<?php 
-					if ($condiciones==1){echo "Efectivo";}
-					elseif ($condiciones==2){echo "Crédito";
-					$update=mysqli_query($con,"update cliente set CLI_SALDO=CLI_SALDO+'$saldo' where CLI_CODIGO='$id_cliente'");
-					
-					$query=mysqli_query($con, "select * from pagos where CLI_CODIGO='".$id_cliente."'");
-		            $count=mysqli_num_rows($query);
-		            $detalle='COMPRA DE ARTÍCULOS EN: $'.$tot;
-					if ($count==0){
-						$insertpago=mysqli_query($con,"INSERT INTO pagos VALUES('','$id_cliente','$fecha','$detalle','$tot','$abo','$sal')");
-					}else{
-						$sql=mysqli_query($con, "select LAST_INSERT_ID(PAG_SALDOACTUAL) as UltimoSaldo from pagos where CLI_CODIGO='$id_cliente' order by PAG_CODIGO desc limit 0,1");
-						$rw=mysqli_fetch_array($sql);
-						$UltimoSaldo=$rw['UltimoSaldo'];
-						$saldototal=$UltimoSaldo+$tot;
-						$saldoreal=$saldototal-$abo;
-						$insertpago=mysqli_query($con,"INSERT INTO pagos VALUES('','$id_cliente','$fecha','$detalle','$saldototal','$abo','$saldoreal')");
-					}
-				}
-				?>
+				
 		   	</td>
-		   	<td style="width:15%;">$<?php echo $abo;?></td>
-		   	<td style="width:15%;">$<?php echo $sal;?></td>
         </tr>
     </table>
 	<br>
