@@ -3,7 +3,6 @@
 		$( "#resultados" ).load( "ajax/Compras/editar_facturacioncompraItems.php" );
 	});
 
-
 	function load(page){
 		var q= $("#q").val();
 		$("#loader").fadeIn('slow');
@@ -19,19 +18,19 @@
 		})
 	}
 
-
-
 	function agregarcompra(id)
 	{
 		var pcompra=document.getElementById('pcompra_'+id).value;
+		var nombre_producto=document.getElementById('nombre_producto_'+id).value;
 		var cantidad=document.getElementById('cantidad_'+id).value;
 		//Inicia validacion
+		var valor=pcompra*cantidad;
 
 		//Fin validacion
 		$.ajax({
         type: "POST",
-        url: "./ajax/Compras/agregar_compraItems.php",
-        data: "id="+id+"&pcompra="+pcompra+"&cantidad="+cantidad,
+        url: "./ajax/Compras/editar_facturacioncompraItems.php",
+        data: "id="+id+"&pcompra="+pcompra+"&cantidad="+cantidad+"&nombre_producto="+nombre_producto+"&valor="+valor,
 		 beforeSend: function(objeto){
 			$("#resultados").html("Mensaje: Cargando...");
 		  },
@@ -41,8 +40,6 @@
 		});
 	}
 		
-		
-
 	function eliminardeldetalle(iddet,idpro,cant)
 	{
 		$.ajax({
@@ -118,6 +115,6 @@
 		event.preventDefault();
 	})
 
-	function imprimir_factura(id_factura){
-		VentanaCentrada('./pdf/documentos/ver_factura.php?id_factura='+id_factura,'Factura','','1024','768','true');
+	function ver_compraItem(id_compra){
+		VentanaCentrada('./pdf/documentos/ver_compraItems.php?id_compra='+id_compra,'Factura','','1024','768','true');
 	}

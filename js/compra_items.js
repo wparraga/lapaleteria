@@ -71,8 +71,6 @@
 		})
 		}
 
-
-		
-		function imprimir_ventaItem(id_venta){
-			VentanaCentrada('./pdf/documentos/ver_ventaItems.php?id_venta='+id_venta,'Factura','','1024','768','true');
-		}
+	function ver_compraItem(id_compra){
+		VentanaCentrada('./pdf/documentos/ver_compraItems.php?id_compra='+id_compra,'Factura','','1024','768','true');
+	}

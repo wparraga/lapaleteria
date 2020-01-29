@@ -93,7 +93,7 @@
 				while ($row=mysqli_fetch_array($query)){
 						$c_codigo=$row['CO_CODIGO'];
 						$c_numero=$row['CO_NUMERO'];
-						$fecha=date("Y-m-d H:i:s", strtotime($row['VI_FECHA']));
+						$fechacompra=date("Y-m-d H:i:s", strtotime($row['CO_FECHA']));
 						$pro_nombres=$row['PRO_NOMBRES'];
 						$pro_telefono=$row['PRO_CELULAR'];
 						$pro_direccion=$row['PRO_DIRECCION'];
@@ -105,15 +105,15 @@
 					?>
 					<tr>
 						<td><?php echo $c_numero; ?></td>
-						<td><?php echo $fecha; ?></td>
+						<td><?php echo $fechacompra; ?></td>
 						<td><a href="#" data-toggle="tooltip" data-placement="top" title="<i class='glyphicon glyphicon-phone'></i> <?php echo $pro_telefono;?><br><i class='glyphicon glyphicon-envelope'></i>  <?php echo $pro_direccion;?>" ><?php echo $pro_nombres;?></a></td>
 						<td><?php echo $nombre_vendedor; ?></td>
 						<td class='text-right'>$<?php echo number_format ($c_totalpagar,2); ?></td>	
 						<td class='text-right'><span class="label <?php echo $label_class;?>"><?php echo $text_estado; ?></span></td>
 						<td class="text-right">
-						<a href="#" class='btn btn-default' title='Ver Productos Comprados' onclick="procesoVerDetalleCompra('<?php echo $c_codigo;?>','<?php echo $c_numero;?>','<?php echo $fecha;?>','<?php echo $pro_nombres;?>','<?php echo $c_totalpagar;?>');return false;" data-toggle="modal" data-target="#myModalDetalleCompra"><i class="glyphicon glyphicon-usd"></i></a>
+						<a href="#" class='btn btn-default' title='Ver Productos Comprados' onclick="procesoVerDetalleCompra('<?php echo $c_codigo;?>','<?php echo $c_numero;?>','<?php echo $fechacompra;?>','<?php echo $pro_nombres;?>','<?php echo $c_totalpagar;?>');return false;" data-toggle="modal" data-target="#myModalDetalleCompra"><i class="glyphicon glyphicon-usd"></i></a>
 						<a href="editar_compras.php?c_codigo=<?php echo $c_codigo;?>" class='btn btn-default' title='Editar Compra' ><i class="glyphicon glyphicon-edit"></i></a>
-						<a href="#" class='btn btn-default' title='Reimprimir Recibo' onclick="imprimir_ventaItem('<?php echo $c_codigo;?>');"><i class="glyphicon glyphicon-download"></i></a>
+						<a href="#" class='btn btn-default' title='Reimprimir Recibo' onclick="ver_compraItem('<?php echo $c_codigo;?>');"><i class="glyphicon glyphicon-download"></i></a>
 						<a href="#" class='btn btn-default' title='Eliminar Compra' onclick="eliminarcompraitems('<?php echo $c_codigo; ?>')"><i class="glyphicon glyphicon-trash"></i> </a> 
 						</td>
 						

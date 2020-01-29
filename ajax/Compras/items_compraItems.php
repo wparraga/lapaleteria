@@ -38,7 +38,7 @@
 			  <table class="table">
 				<tr  class="success">
 					<th>COD.</th>
-					<th>Artículo</th>
+					<th>Producto</th>
 					<th>Existen</th>
 					<th>P.Compra</th>
 					<th>Cant.</th>
@@ -59,9 +59,10 @@
 						<td>$<?php echo $pcmasiva; ?></td>
 						<td class='col-xs-1'>
 							<div class="pull-right">
-								<input type="hidden" id="pcompra_<?php echo $id_producto; ?>" value="<?php echo $pcmasiva;?>">
 
-								<input type="text" class="form-control" style="text-align:right" id="cantidad_<?php echo $id_producto; ?>" value="1" maxlength="3" onkeypress="return soloNumeros(event,this);">
+					<input type="hidden" id="pcompra_<?php echo $id_producto; ?>" value="<?php echo $pcmasiva;?>">
+					<input type="hidden" id="nombre_producto_<?php echo $id_producto; ?>" value="<?php echo $nombre_producto;?>">
+					<input type="text" class="form-control" style="text-align:right" id="cantidad_<?php echo $id_producto; ?>" value="1" maxlength="3" onkeypress="return soloNumeros(event,this);">
 							</div>
 					    </td>
 						<td class='text-center'><a class='btn btn-success'href="#" onclick="agregarcompra('<?php echo $id_producto ?>')"><i class="glyphicon glyphicon-plus"></i></a>

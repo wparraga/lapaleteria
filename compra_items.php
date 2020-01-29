@@ -11,7 +11,6 @@
 	$active_usuarios="";	
 	$title="Compra Items | La Paleteria";
 ?>
-<!DOCTYPE html>
 <html lang="es">
   <head>
 	<?php include("head.php");?>

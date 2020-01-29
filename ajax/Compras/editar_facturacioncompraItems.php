@@ -5,16 +5,19 @@
 
 	if (isset($_POST['id'])){$id=intval($_POST['id']);}
 	if (isset($_POST['cantidad'])){$cantidad=intval($_POST['cantidad']);}
-	if (isset($_POST['precio_venta'])){$precio_venta=floatval($_POST['precio_venta']);}
+	if (isset($_POST['pcompra'])){$pcompra=floatval($_POST['pcompra']);}
+	if (isset($_POST['nombre_producto'])){$nombre_producto=$_POST['nombre_producto'];}
+	if (isset($_POST['valor'])){$valor=floatval($_POST['valor']);}
 
 	
 	require_once ("../../config/db.php");
 	require_once ("../../config/conexion.php");
 	
 
-	if (!empty($c_codigo) and !empty($cantidad) and !empty($precio_venta))
+	if (!empty($id) and !empty($cantidad) and !empty($pcompra) and !empty($nombre_producto) and !empty($valor))
 		{
-			$insert_tmp=mysqli_query($con, "INSERT INTO detalle_factura (numero_factura, id_producto,cantidad,precio_venta) VALUES ('$numero_factura','$id','$cantidad','$precio_venta')");
+			$insert_tmp=mysqli_query($con, "INSERT INTO detalle_compra (PRE_CODIGO,CO_CODIGO,DC_DETALLE,DC_PRECIO,DC_CANT,DC_TOTAL)VALUES('$id','$c_codigo','$nombre_producto','$pcompra','$cantidad','$valor')");
+			$updatepro=mysqli_query($con, "UPDATE precios SET PRE_CANT=PRE_CANT+'".$cantidad."' WHERE PRE_CODIGO='".$id."'");
 		}
 	
 	if (isset($_GET['iddet']) and isset($_GET['idpro']) and isset($_GET['cant']))//codigo elimina un elemento del array
