@@ -16,7 +16,7 @@
 
 
 			  <div class="form-group">
-				<label for="mod_nombre" class="col-sm-3 control-label">Artículo:</label>
+				<label for="mod_nombre" class="col-sm-3 control-label">Producto:</label>
 				<div class="col-sm-8">
 				  <textarea class="form-control" id="mod_nombre" name="mod_nombre" placeholder="Nombre del producto" required></textarea>
 				  <input type="hidden" name="mod_id" id="mod_id">

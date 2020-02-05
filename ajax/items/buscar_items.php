@@ -82,7 +82,7 @@
 				<tr  class="success">
 					<th>Cod.</th>
 					<th>Cod. Barra</th>
-					<th>Items</th>
+					<th>Producto</th>
 					<th class='text-right'>Existencia</th>
 					<th class='text-center'>Acciones</th>
 				</tr>

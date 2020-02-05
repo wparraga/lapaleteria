@@ -55,7 +55,7 @@
 	include("navbar.php");
 	?>  
     <div class="container">
-	<div class="panel panel-info">
+	<div class="panel panel-success">
 		<div class="panel-heading">
 			<h4><i class='glyphicon glyphicon-edit'></i> Editar Compra</h4>
 		</div>

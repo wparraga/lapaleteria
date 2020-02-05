@@ -40,7 +40,7 @@
 			<div class="table-responsive">
 			  <table class="table">
 				<tr  class="success">
-					<th>Items</th>
+					<th>Producto</th>
 					<th class='text-right'>#Comprados</th>
 					<th class='text-right'>#Vendidos</th>
 					<th class='text-right'>#Existen</th>

@@ -29,10 +29,10 @@
 	<div class="panel panel-success">
 		<div class="panel-heading">
 			<div class="pull-right">
-				<a  href="consultaExistencias.php" class="btn btn-success"><span class="glyphicon glyphicon-transfer" ></span> Consultar Existencias de Paletas Vendidas</a>
-				<button type='button' class="btn btn-primary btn-success" data-toggle="modal" data-target="#nuevoProducto"><span class="glyphicon glyphicon-plus" ></span> Nueva Paleta</button>
+				<a  href="consultaExistencias.php" class="btn btn-success"><span class="glyphicon glyphicon-transfer" ></span> Consultar Existencias de Productos Vendidos</a>
+				<button type='button' class="btn btn-primary btn-success" data-toggle="modal" data-target="#nuevoProducto"><span class="glyphicon glyphicon-plus" ></span> Nuevo Producto</button>
 			</div>
-			<h4><i class='glyphicon glyphicon-search'></i> Buscar Paleta</h4>
+			<h4><i class='glyphicon glyphicon-search'></i> Buscar Producto</h4>
 		</div>
 		<div class="panel-body">
 		
@@ -48,7 +48,7 @@
 						<div class="form-group row">
 							<label for="q" class="col-md-2 control-label">Código o nombre</label>
 							<div class="col-md-5">
-								<input type="text" class="form-control" id="q" placeholder="Código de Barra o nombre del Items" onkeyup='load(1);' autocomplete="off">
+								<input type="text" class="form-control" id="q" placeholder="Código de Barra o nombre del Producto" onkeyup='load(1);' autocomplete="off">
 							</div>
 							<div class="col-md-3">
 								<button type="button" class="btn btn-default" onclick='load(1);'>
@@ -200,20 +200,5 @@ $( "#ajustar_producto" ).submit(function( event ) {
                        $("#resultadoID").html(response);
                 }
         });
-        }
-
-    function cargarcomboPro(proveedores){
-        var comboPro=""; 
-        var parametros = {
-                "proveedores" : proveedores
-        };
-        request = $.ajax({
-                data:  parametros,
-                url:   'ajax/items/cargarCombos/comboProveedor.php',
-                type:  'post',
-                success: function (response) {
-                       $("#comboPro").html(response);
-                }
-        });
-        }
+    }
 </script>
