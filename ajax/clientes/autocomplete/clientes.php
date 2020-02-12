@@ -16,7 +16,7 @@ if ($con)
 		$row_array['id_cliente']=$id_cliente;
 		$row_array['nombre_cliente']=$row['CLI_NOMBRES'];
 		$row_array['telefono_cliente']=$row['CLI_TELEFONO'];
-		$row_array['email_cliente']=$row['CLI_DIRECCION'];
+		$row_array['direccion_cliente']=$row['CLI_DIRECCION'];
 		array_push($return_arr,$row_array);
     }
 	
