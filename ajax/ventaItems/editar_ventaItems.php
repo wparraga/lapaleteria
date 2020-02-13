@@ -5,8 +5,8 @@
            $errors[] = "Cliente Vacio";
         }else if (empty($_POST['id_vendedor'])) {
            $errors[] = "Selecciona vendedor";
-        } else if (empty($_POST['condiciones'])){
-			$errors[] = "Selecciona tipo de pago";
+        //} else if (empty($_POST['condiciones'])){
+		//	$errors[] = "Selecciona tipo de pago";
 		} else if (
 			!empty($_POST['id_cliente']) &&
 			!empty($_POST['id_vendedor']) &&
@@ -25,7 +25,9 @@
 				$errors []= "Lo siento algo ha salido mal intenta nuevamente.".mysqli_error($con);
 			}
 		} else {
-			$errors []= "Error desconocido.";
+			error_reporting(E_ALL);
+			ini_set('display_errors', '1');
+			//$errors []= "Error desconocido.";
 		}
 		if (isset($errors)){
 			?>

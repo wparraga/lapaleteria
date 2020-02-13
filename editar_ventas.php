@@ -29,7 +29,7 @@
 				$direccion_cliente=$rw_factura['CLI_DIRECCION'];
 				$id_vendedor_db=$rw_factura['ID_VENDEDOR'];
 				$fecha_factura=date("Y/m/d H:i:s", strtotime($rw_factura['VI_FECHA']));
-				$tipo=$rw_factura['VI_TIPOPAGO'];
+				$condiciones=$rw_factura['VI_TIPOPAGO'];
 				$numero_venta=$rw_factura['VI_NUMERO'];
 				$_SESSION['vi_codigo']=$vi_codigo;
 				$_SESSION['numero_venta']=$numero_venta;
@@ -106,8 +106,10 @@
 							</div>
 							<label for="pago" class="col-md-1 control-label">Pago:</label>
 							<div class="col-md-2">
-								<select class='form-control input-sm' id="condiciones" onChange="document.getElementById('abono').disabled=this.selectedIndex!=1">			<option value="1" <?php if ($tipo==1){echo "selected";}?>>		Contado</option>
-									<option value="2" <?php if ($tipo==2){echo "selected";}?>>Crédito</option>
+								<select class='form-control input-sm' id="condiciones" onChange="">			<option value="1" <?php if ($condiciones==1){echo "selected";}?>>
+									Contado</option>
+									<option value="2" <?php if ($condiciones==2){echo "selected";}?>>
+									Crédito</option>
 								</select>
 							</div>
 							<div class="col-md-2">	
