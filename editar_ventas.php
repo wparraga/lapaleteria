@@ -17,7 +17,7 @@
 	if (isset($_GET['vi_codigo']))
 	{
 		$vi_codigo=intval($_GET['vi_codigo']);
-		$campos="cliente.CLI_CODIGO, cliente.CLI_NOMBRES, cliente.CLI_TELEFONO, cliente.CLI_DIRECCION,venta_item.ID_VENDEDOR,venta_item.VI_FECHA,venta_item.VI_NUMERO,venta_item.VI_SUBTOTAL,venta_item.VI_IVA,venta_item.VI_TOTAL,venta_item.VI_TIPOPAGO";
+		$campos="cliente.CLI_CODIGO,cliente.CLI_NOMBRES,cliente.CLI_TELEFONO,cliente.CLI_DIRECCION,venta_item.ID_VENDEDOR,venta_item.VI_FECHA,venta_item.VI_NUMERO,venta_item.VI_TIPOPAGO";
 		$sql_factura=mysqli_query($con,"select $campos from venta_item, cliente where venta_item.CLI_CODIGO=cliente.CLI_CODIGO and venta_item.VI_CODIGO='".$vi_codigo."'");
 		$count=mysqli_num_rows($sql_factura);
 		if ($count==1)
@@ -106,10 +106,9 @@
 							</div>
 							<label for="pago" class="col-md-1 control-label">Pago:</label>
 							<div class="col-md-2">
-								<select class='form-control input-sm' id="condiciones" onChange="">			<option value="1" <?php if ($condiciones==1){echo "selected";}?>>
-									Contado</option>
-									<option value="2" <?php if ($condiciones==2){echo "selected";}?>>
-									Crédito</option>
+								<select class='form-control input-sm' id="condiciones" name="condiciones" onChange="document.getElementById('abono').disabled=this.selectedIndex!=1">>
+									<option value="1"<?php if ($condiciones==1){echo "selected";}?>>Contado</option>
+									<option value="2"<?php if ($condiciones==2){echo "selected";}?>>Crédito</option>
 								</select>
 							</div>
 							<div class="col-md-2">	
@@ -127,9 +126,15 @@
 					</div>	
 				</div>
 			</form>	
-			<div class="clearfix"></div>
-			<div class="editar_venta" class='col-md-12' style="margin-top:10px"></div><!-- Carga los datos ajax -->	
-		<div id="resultados" class='col-md-12' style="margin-top:10px"></div><!-- Carga los datos ajax -->			
+			<div class="clearfix">
+				
+			</div>
+			<div class="editar_venta" class='col-md-12' style="margin-top:20px">
+				
+			</div><!-- Carga los datos ajax -->	
+			<div id="resultados" class='col-md-12' style="margin-top:10px">
+				
+			</div><!-- Carga los datos ajax -->			
 			
 		</div>
 	</div>		

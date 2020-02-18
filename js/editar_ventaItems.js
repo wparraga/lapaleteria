@@ -1,6 +1,6 @@
 	$(document).ready(function(){
 		load(1);
-		$( "#resultados" ).load( "ajax/Compras/editar_facturacioncompraItems.php" );
+		$( "#resultados" ).load( "ajax/ventaItems/editar_facturacionventaItems.php" );
 	});
 
 	function load(page){
@@ -18,33 +18,60 @@
 		})
 	}
 
-	function agregarcompra(id)
-	{
-		var pcompra=document.getElementById('pcompra_'+id).value;
-		var nombre_producto=document.getElementById('nombre_producto_'+id).value;
-		var cantidad=document.getElementById('cantidad_'+id).value;
-		//Inicia validacion
-		var valor=pcompra*cantidad;
-
-		//Fin validacion
-		$.ajax({
-        type: "POST",
-        url: "./ajax/Compras/editar_facturacioncompraItems.php",
-        data: "id="+id+"&pcompra="+pcompra+"&cantidad="+cantidad+"&nombre_producto="+nombre_producto+"&valor="+valor,
-		 beforeSend: function(objeto){
-			$("#resultados").html("Mensaje: Cargando...");
-		  },
-		  success: function(datos){
-		  	$("#resultados").html(datos);
-		  }
-		});
-	}
+	function agregar (id)
+		{
+			var precio_venta=document.getElementById('precio_venta_'+id).value;
+			var cantidad=document.getElementById('cantidad_'+id).value;
+			var existen=document.getElementById('existen_'+id).value;
+			var seguridad=document.getElementById('seguridad_'+id).value;
+			var pv=parseFloat(precio_venta);
+			//Inicia validacion
+			if(cantidad>existen){
+				swal({
+					type: "error",
+					title: " la Cantidad ingresada es mayor a las que existen.",
+					showConfirmButton: true,
+					confirmButtonColor: "#d9534f",
+					confirmButtonText: "Aceptar",
+					closeOnConfirm: false
+					})
+				document.getElementById('cantidad_'+id).focus();
+				return false;
+			}
+			if(pv<seguridad){
+				var str1 = "El precio no es seguro, puede vender el Items hasta en: $";
+				var res = str1.concat(seguridad);
+				swal({
+					type: "error",
+					title: res,
+					showConfirmButton: true,
+					confirmButtonColor: "#d9534f",
+					confirmButtonText: "Aceptar",
+					closeOnConfirm: false
+					})
+				
+				document.getElementById('precio_venta_'+id).focus();
+				return false;
+			}
+			//Fin validacion
+			$.ajax({
+	        type: "POST",
+	        url: "./ajax/ventaItems/editar_facturacionventaItems.php",
+	        data: "id="+id+"&precio_venta="+precio_venta+"&cantidad="+cantidad+"&existen="+existen,
+			 beforeSend: function(objeto){
+				$("#resultados").html("Mensaje: Cargando...");
+			  },
+	        success: function(datos){
+			$("#resultados").html(datos);
+			}
+			});
+		}
 		
 	function eliminardeldetalle(iddet,idpro,cant)
 	{
 		$.ajax({
 			type: "GET",
-			url: "./ajax/Compras/editar_facturacioncompraItems.php",
+			url: "./ajax/ventaItems/editar_facturacionventaItems.php",
 			data: "iddet="+iddet+"&idpro="+idpro+"&cant="+cant,
 			beforeSend: function(objeto){
 				$("#resultados").html("Mensaje: Cargando...");
@@ -76,7 +103,3 @@
 		});
 		event.preventDefault();
 	});
-
-	function ver_compraItem(id_compra){
-		VentanaCentrada('./pdf/documentos/ver_compraItems.php?id_compra='+id_compra,'Factura','','1024','768','true');
-	}
