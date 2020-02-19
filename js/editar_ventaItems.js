@@ -7,7 +7,7 @@
 		var q= $("#q").val();
 		$("#loader").fadeIn('slow');
 		$.ajax({
-			url:'./ajax/ventaItems/items_ventaItems.php?action=ajax&page='+page+'&q='+q,
+			url:'./ajax/ventaItems/items_editarventaItems.php?action=ajax&page='+page+'&q='+q,
 			beforeSend: function(objeto){
 				$('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
 			},
@@ -18,15 +18,19 @@
 		})
 	}
 
-	function agregar (id)
+	function agregarproducto(id)
 		{
+			var nombre_producto=document.getElementById('nombre_producto_'+id).value;
 			var precio_venta=document.getElementById('precio_venta_'+id).value;
 			var cantidad=document.getElementById('cantidad_'+id).value;
 			var existen=document.getElementById('existen_'+id).value;
 			var seguridad=document.getElementById('seguridad_'+id).value;
 			var pv=parseFloat(precio_venta);
+			var cant=parseFloat(cantidad);
+			var exi=parseFloat(existen);
+			var pvalor=precio_venta*cantidad;
 			//Inicia validacion
-			if(cantidad>existen){
+			if(cant>exi){
 				swal({
 					type: "error",
 					title: " la Cantidad ingresada es mayor a las que existen.",
@@ -57,7 +61,7 @@
 			$.ajax({
 	        type: "POST",
 	        url: "./ajax/ventaItems/editar_facturacionventaItems.php",
-	        data: "id="+id+"&precio_venta="+precio_venta+"&cantidad="+cantidad+"&existen="+existen,
+	        data: "id="+id+"&precio_venta="+precio_venta+"&cantidad="+cantidad+"&nombre_producto="+nombre_producto+"&pvalor="+pvalor,
 			 beforeSend: function(objeto){
 				$("#resultados").html("Mensaje: Cargando...");
 			  },

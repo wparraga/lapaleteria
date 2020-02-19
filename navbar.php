@@ -18,7 +18,7 @@
     ?>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="<?php echo $active_facturas;?>"><a href="venta_items.php"><i class='glyphicon glyphicon-usd'></i> Venta Items</a></li>
+            <li class="<?php echo $active_facturas;?>"><a href="venta.php"><i class='glyphicon glyphicon-usd'></i> Ventas</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="login.php?logout"><i class='glyphicon glyphicon-off'></i> Salir</a></li>

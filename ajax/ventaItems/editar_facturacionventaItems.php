@@ -3,21 +3,19 @@
 	$vi_codigo= $_SESSION['vi_codigo'];
 	$numero_venta= $_SESSION['numero_venta'];
 
-	if (isset($_POST['id'])){$id=intval($_POST['id']);}
-	if (isset($_POST['cantidad'])){$cantidad=intval($_POST['cantidad']);}
-	if (isset($_POST['precio_venta'])){$precio_venta=floatval($_POST['precio_venta']);}
+	if (isset($_POST['id'])){$id=$_POST['id'];}
 	if (isset($_POST['nombre_producto'])){$nombre_producto=$_POST['nombre_producto'];}
-	if (isset($_POST['valor'])){$valor=floatval($_POST['valor']);}
+	if (isset($_POST['cantidad'])){$cantidad=$_POST['cantidad'];}
+	if (isset($_POST['precio_venta'])){$precio_venta=$_POST['precio_venta'];}
+	if (isset($_POST['pvalor'])){$pvalor=$_POST['pvalor'];}
 
 	
 	require_once ("../../config/db.php");
 	require_once ("../../config/conexion.php");
 
-
-
-	if (!empty($id) and !empty($cantidad) and !empty($precio_venta) and !empty($nombre_producto) and !empty($valor))
+	if (!empty($id) and !empty($nombre_producto) and !empty($cantidad) and !empty($precio_venta) and !empty($pvalor))
 		{
-			$insert_tmp=mysqli_query($con, "INSERT INTO detalle_venta (PRE_CODIGO,VI_CODIGO,DV_DETALLE,DV_PRECIO,DV_CANT,DV_TOTAL)VALUES('$id','$vi_codigo','$nombre_producto','$precio_venta','$cantidad','$valor')");
+			$insert_tmp=mysqli_query($con, "INSERT INTO detalle_venta (PRE_CODIGO,VI_CODIGO,DV_DETALLE,DV_PRECIO,DV_CANT,DV_TOTAL)VALUES('$id','$vi_codigo','$nombre_producto','$precio_venta','$cantidad','$pvalor')");
 			$updatepro=mysqli_query($con, "UPDATE precios SET PRE_CANT=PRE_CANT-'".$cantidad."' WHERE PRE_CODIGO='".$id."'");
 		}
 	

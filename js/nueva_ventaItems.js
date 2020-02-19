@@ -26,8 +26,10 @@
 			var existen=document.getElementById('existen_'+id).value;
 			var seguridad=document.getElementById('seguridad_'+id).value;
 			var pv=parseFloat(precio_venta);
+			var cant=parseFloat(cantidad);
+			var exi=parseFloat(existen);
 			//Inicia validacion
-			if(cantidad>existen){
+			if(cant>exi){
 				swal({
 					type: "error",
 					title: " la Cantidad ingresada es mayor a las que existen.",

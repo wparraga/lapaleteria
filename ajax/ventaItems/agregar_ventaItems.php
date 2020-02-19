@@ -36,7 +36,7 @@ if (isset($_GET['id']))//codigo elimina un elemento del array
 <tr>
 	<th class='text-center'>CODIGO</th>
 	<th class='text-center'>CANT.</th>
-	<th>DESCRIPCION</th>
+	<th>PRODUCTO</th>
 	<th class='text-right'>PRECIO UNIT.</th>
 	<th class='text-right'>PRECIO TOTAL</th>
 	<th></th>

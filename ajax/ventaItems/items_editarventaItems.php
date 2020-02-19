@@ -65,9 +65,9 @@
 						<td>$<?php echo $pcmasiva; ?></td>
 						<td class='col-xs-1'>
 							<div class="pull-right">
+								<input type="hidden" id="nombre_producto_<?php echo $id_producto; ?>" value="<?php echo $nombre_producto;?>">
 								<input type="hidden" id="existen_<?php echo $id_producto; ?>" value="<?php echo $existencia;?>">
 								<input type="hidden" id="seguridad_<?php echo $id_producto; ?>" value="<?php echo $seguridad;?>">
-
 								<input type="text" class="form-control" style="text-align:right" id="cantidad_<?php echo $id_producto; ?>" value="1" maxlength="3" onkeypress="return soloNumeros(event,this);">
 							</div>
 					    </td>
@@ -77,7 +77,7 @@
 							</div>
 						</td>
 						<td>$<?php echo $seguridad; ?></td>
-						<td class='text-center'><a class='btn btn-success'href="#" onclick="agregar('<?php echo $id_producto ?>')"><i class="glyphicon glyphicon-plus"></i></a>
+						<td class='text-center'><a class='btn btn-success'href="#" onclick="agregarproducto('<?php echo $id_producto ?>')"><i class="glyphicon glyphicon-plus"></i></a>
 						</td>
 					</tr>
 					<?php
