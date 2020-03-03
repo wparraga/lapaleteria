@@ -4,10 +4,6 @@ include('../is_logged.php');
            $errors[] = "ID vacío";
        } else if ($_POST['tipo']==""){
 			$errors[] = "Selecciona el tipo tranasacción";
-        }else if (empty($_POST['aju_costo'])){
-           $errors[] = "Costo vacío";
-        }else if (empty($_POST['aju_costomasiva'])){
-           $errors[] = "Costo más IVA vacío";
         }else if (empty($_POST['aju_pvp'])){
            $errors[] = "PVP vacío";
         }else if (empty($_POST['aju_ganancia'])){
@@ -17,8 +13,6 @@ include('../is_logged.php');
 		} else if (
 			!empty($_POST['aju_id']) &&
 			$_POST['tipo']!="" &&
-			!empty($_POST['aju_costo']) &&
-			!empty($_POST['aju_costomasiva']) &&
 			!empty($_POST['aju_pvp']) &&
 			!empty($_POST['aju_ganancia']) &&
 			!empty($_POST['aju_seguridad'])

@@ -10,7 +10,7 @@
             $fec = $_POST['fecha'];
             $cli = $_POST['cliente'];
             $total = $_POST['total'];
-            echo '<label>Venta:</label> '.$num.'</br>';
+            echo '<label>Venta #:</label> '.$num.'</br>';
             echo '<label>Fecha:</label> '.$fec.'</br>';
             echo '<label>Cliente:</label> '.$cli.'</br>';
             echo '<label>Total: $</label>'.$total;
@@ -18,7 +18,7 @@
         <thead>
             <tr class="well">
                 <th>Cant.</th>
-                <th>Artículo</th>
+                <th>Descripción</th>
                 <th class='text-right'>PVP</th>
                 <th class='text-right'>Total</th>
             </tr>
