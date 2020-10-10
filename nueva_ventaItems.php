@@ -19,7 +19,6 @@
         header("Location: nueva_ventaItems.php");
 	}
 ?>
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <?php include("head.php");?>

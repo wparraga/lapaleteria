@@ -3,14 +3,10 @@
 	/*Inicia validacion del lado del servidor*/
 	if (empty($_POST['mod_cod'])) {
            $errors[] = "ID vacío";
-        }else if (empty($_POST['mod_existen'])) {
-           $errors[] = "Existencia vacío";
         }else if (empty($_POST['mod_seguridad'])) {
            $errors[] = "Seguridad vacío";   
 		} else if (
-			!empty($_POST['mod_cod']) &&
-			!empty($_POST['mod_existen'])&&
-			!empty($_POST['mod_seguridad'])
+			!empty($_POST['mod_cod'])
 		){
 		require_once ("../../config/db.php");
 		require_once ("../../config/conexion.php");

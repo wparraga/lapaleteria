@@ -4,8 +4,10 @@ http://work.smarchal.com/twbscolor/
 
 */
 .navbar-default {
-  background-color: #5dd94f;
+  /*background-color: #5dd94f;*/
+  background-color: #747474;
   border-color: #5dd94f;
+
 }
 .navbar-default .navbar-brand {
   color: #231818;

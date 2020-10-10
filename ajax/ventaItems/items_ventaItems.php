@@ -7,10 +7,10 @@
          $q = mysqli_real_escape_string($con,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
 		 $aColumns = array('IT_CODIGOBARRA', 'IT_ARTICULO');//Columnas de busqueda
 		 $sTable = "vis_itemsconprecios";
-		 $sWhere = " where PRE_CANT>0";
+		 $sWhere = "WHERE PRE_CANT>0";
 		if ( $_GET['q'] != "" )
 		{
-			$sWhere = "WHERE (";
+			$sWhere = "WHERE(";
 			for ( $i=0 ; $i<count($aColumns) ; $i++ )
 			{
 				$sWhere .= $aColumns[$i]." LIKE '%".$q."%' OR ";
@@ -24,7 +24,7 @@
 		$per_page = 5;
 		$adjacents  = 4;
 		$offset = ($page - 1) * $per_page;
-		$count_query   = mysqli_query($con, "SELECT count(*) AS numrows FROM $sTable  $sWhere");
+		$count_query   = mysqli_query($con, "SELECT count(*) AS numrows FROM $sTable $sWhere");
 		$row= mysqli_fetch_array($count_query);
 		$numrows = $row['numrows'];
 		$total_pages = ceil($numrows/$per_page);

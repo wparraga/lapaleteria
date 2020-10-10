@@ -139,13 +139,13 @@
 				  <label># Vendidos: </label><input type="text" class="form-control" value="<?php echo $tv;?>" name="tv" maxlength="0" >
 				</div>
 				<div class="col-sm-2">
-				  <label>Total Invertido: </label><input type="text" class="form-control" value="<?php echo '$ '.$ti;?>"  name="ti"maxlength="0" >
+				  <label>Venta Total: </label><input type="text" class="form-control" value="<?php echo '$ '.$tve;?>" name="tve"maxlength="0" >
 				</div>
 				<div class="col-sm-2">
-				  <label>Total Venta: </label><input type="text" class="form-control" value="<?php echo '$ '.$tve;?>" name="tve"maxlength="0" >
+				  <label>Invertido: </label><input type="text" class="form-control" value="<?php echo '$ '.$ti;?>"  name="ti"maxlength="0" >
 				</div>
 				<div class="col-sm-2">
-				  <label>Total Ganancia: </label><input type="text" class="form-control" value="<?php echo '$ '.$tg;?>" name="tg" maxlength="0" >
+				  <label>Ganancia: </label><input type="text" class="form-control" value="<?php echo '$ '.$tg;?>" name="tg" maxlength="0" >
 				</div>
 				<div class="col-sm-2">
 				  <label>Total Gastos Inversión: </label><input type="text" class="form-control" value="<?php echo '$ '.$tgi;?>" name="tgi" maxlength="0" >
