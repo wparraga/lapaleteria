@@ -19,7 +19,7 @@
 		$sWhere.=" order by Fecha asc";
 		include '../pagination.php';
 		$page = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))?$_REQUEST['page']:1;
-		$per_page = 5;
+		$per_page = 500;
 		$adjacents  = 4;
 		$offset = ($page - 1) * $per_page;
 		$count_query   = mysqli_query($con, "SELECT count(*) AS numrows FROM $sTable  $sWhere");
@@ -41,7 +41,7 @@
 		}
 		$sWhere1.=" order by gas_fecha asc";
 		$page1 = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))?$_REQUEST['page']:1;
-		$per_page1 = 5;
+		$per_page1 = 500;
 		$adjacents1  = 4;
 		$offset1 = ($page1 - 1) * $per_page1;
 		$count_query1   = mysqli_query($con, "SELECT count(*) AS numrows1 FROM $sTable1  $sWhere1");
