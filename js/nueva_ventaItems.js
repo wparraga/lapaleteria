@@ -121,7 +121,25 @@
 		  if (condiciones==1){
 		  	var abono = total;
 		  	var saldo=0;
-		  	VentanaCentrada('./pdf/documentos/ventaItems_pdf.php?id_cliente='+id_cliente+'&id_vendedor='+id_vendedor+'&fecha='+fecha+'&condiciones='+condiciones+'&subtotal='+subtotal+'&iva='+iva+'&total='+total+'&abono='+abono+'&saldo='+saldo,'Factura','','1024','768','true');
+		  	var parametros = {
+		  		"id_cliente" : id_cliente,
+		        "id_vendedor" : id_vendedor,
+		        "fecha" : fecha,
+		        "condiciones" : condiciones,
+		        "subtotal" : subtotal,
+		        "total" : total,
+		        "abono" : abono,
+		        "saldo" : saldo,
+		    };
+		     request = $.ajax({
+		        data:  parametros,
+		        url:   './pdf/documentos/ventaItems_pdf.php',
+		        type:  'get',
+		        success: function (response) {
+		               window.location.replace("venta_items.php");
+		        }
+		    });
+		  	//VentanaCentrada('./pdf/documentos/ventaItems_pdf.php?id_cliente='+id_cliente+'&id_vendedor='+id_vendedor+'&fecha='+fecha+'&condiciones='+condiciones+'&subtotal='+subtotal+'&iva='+iva+'&total='+total+'&abono='+abono+'&saldo='+saldo,'Factura','','1024','768','true');
 		  }
 		  if (condiciones==2){
 			  	var abono = parseFloat($("#abono").val());
@@ -141,6 +159,31 @@
 				}
 		  }
 	 	});
+
+
+
+	$("#datos_facturaventaintens").submit(function(event) {
+    $('#guardar_datos').attr("disabled", true);
+
+    var parametros = $(this).serialize();
+    $.ajax({
+        type: "POST",
+        url: "ajax/ventaItems/venta_itens.php",
+        data: parametros,
+        beforeSend: function(objeto) {
+            $("#resultado_ajax_ventaitems").html("Mensaje: Cargando...");
+        },
+        success: function(datos) {
+            $('#guardar_datos').attr("disabled", false);
+            window.location.replace("venta_items.php");
+            load(1);
+        }
+    });
+    event.preventDefault();
+})
+
+
+
 		
 		$( "#guardar_cliente" ).submit(function( event ) {
 		  $('#guardar_datos').attr("disabled", true);

@@ -44,7 +44,7 @@
 				  <label for="nombre_cliente" class="col-md-1 control-label">Cliente:</label>
 				  <div class="col-md-3">
 					  <input type="text" class="form-control input-sm" id="nombre_cliente" placeholder="Seleccione un cliente" required>
-					  <input id="id_cliente" type='hidden'>	
+					  <input id="id_cliente" name="id_cliente" type='hidden'>	
 				  </div>
 				  
 				<label for="tel1" class="col-md-1 control-label">Teléfono:</label>
@@ -59,7 +59,7 @@
 						<div class="form-group row">
 							<label for="empresa" class="col-md-1 control-label">Vendedor(a):</label>
 							<div class="col-md-3">
-								<select class="form-control input-sm" id="id_vendedor" disabled>
+								<select class="form-control input-sm" id="id_vendedor" name="id_vendedor" disabled>
 									<?php
 										$sql_vendedor=mysqli_query($con,"select * from users order by lastname");
 										while ($rw=mysqli_fetch_array($sql_vendedor)){
@@ -79,11 +79,11 @@
 							</div>
 							<label for="tel2" class="col-md-1 control-label">Fecha:</label>
 							<div class="col-md-2">
-								<input type="datetime" class="form-control input-sm" id="fecha" value="<?php echo date("Y-m-d H:i:s");?>" required>
+								<input type="datetime" class="form-control input-sm" id="fecha" name="fecha" value="<?php echo date("Y-m-d H:i:s");?>" required>
 							</div>
 							<label for="pago" class="col-md-1 control-label">Pago:</label>
 							<div class="col-md-2">
-								<select class='form-control input-sm' id="condiciones" onChange="document.getElementById('abono').disabled=this.selectedIndex!=1">>
+								<select class='form-control input-sm' id="condiciones" name="condiciones" onChange="document.getElementById('abono').disabled=this.selectedIndex!=1">>
 									<option value="1">Contado</option>
 									<option value="2">Crédito</option>
 								</select>
@@ -101,7 +101,7 @@
 						</button>
 						<a  href="nueva_ventaItems.php?del=<?php echo $id_vendedor;?>" class="btn btn-default"><span class="glyphicon glyphicon-remove" ></span> Cancelar Venta</a>
 						<button type="submit" class="btn btn-default">
-						  <span class="glyphicon glyphicon-saved"></span> Guardar Venta/Imprimir
+						  <span class="glyphicon glyphicon-saved"></span> Guardar Venta
 						</button>
 					</div>	
 				</div>
@@ -120,7 +120,7 @@
 	<?php
 	include("footer.php");
 	?>
-	<script type="text/javascript" src="js/VentanaCentrada.js"></script>
+	
 	<script type="text/javascript" src="js/nueva_ventaItems.js"></script>
 	<link rel="stylesheet" href="css/jquery-ui.css">
     <script type="text/javascript" src="js/jquery/jquery-ui.js"></script>
