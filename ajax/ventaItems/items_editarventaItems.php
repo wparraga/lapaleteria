@@ -4,32 +4,25 @@
 	require_once ("../../config/conexion.php");
 	$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
 	if($action == 'ajax'){
-         $q = mysqli_real_escape_string($con,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
-		 $aColumns = array('IT_CODIGOBARRA', 'IT_ARTICULO');//Columnas de busqueda
-		 $sTable = "vis_itemsconprecios";
-		 $sWhere = " where PRE_CANT>0";
+        $q = mysqli_real_escape_string($con,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
+		$sTable = "vis_itemsconprecios";
+		$sWhere = "";
+		$sWhere.=" WHERE PRE_CANT>0";
 		if ( $_GET['q'] != "" )
 		{
-			$sWhere = "WHERE (";
-			for ( $i=0 ; $i<count($aColumns) ; $i++ )
-			{
-				$sWhere .= $aColumns[$i]." LIKE '%".$q."%' OR ";
-			}
-			$sWhere = substr_replace( $sWhere, "", -3 );
-			$sWhere .= ')';
+		$sWhere.= " and  (IT_CODIGOBARRA like '%$q%' or IT_ARTICULO like '%$q%')";	
 		}
-		$sWhere.=" order by IT_ARTICULO asc";
-		include '../pagination.php';
+        $sWhere.=" order by IT_ARTICULO asc";
+        include '../pagination.php';
 		$page = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))?$_REQUEST['page']:1;
-		$per_page = 5;
-		$adjacents  = 4;
+		$per_page = 5; 
+		$adjacents  = 4; 
 		$offset = ($page - 1) * $per_page;
 		$count_query   = mysqli_query($con, "SELECT count(*) AS numrows FROM $sTable  $sWhere");
-		$row= mysqli_fetch_array($count_query);
-		$numrows = $row['numrows'];
+        if ($row= mysqli_fetch_array($count_query)){$numrows = $row['numrows'];}
 		$total_pages = ceil($numrows/$per_page);
-		$reload = '../../index.php';
-		$sql="SELECT * FROM $sTable $sWhere LIMIT $offset,$per_page";
+		$reload = '../../../tarifarios.php';
+		$sql="SELECT * FROM  $sTable $sWhere LIMIT $offset,$per_page";
 		$query = mysqli_query($con, $sql);
 
 		if ($numrows>0){
